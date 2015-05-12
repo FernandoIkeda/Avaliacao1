@@ -49,8 +49,4 @@ public class Avaliacao1 {
         return vetor;
     }
         
-    }
-    
-    // implementar raizesEquacao(Complexo, Complexo, Complexo)
-    
 }
