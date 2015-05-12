@@ -13,8 +13,6 @@ public class Complexo {
     private double img;
 
     public Complexo() {
-        this.real = 0.0;
-        this.img = 0.0;
     }
 
     public Complexo(double real, double img) {
@@ -23,11 +21,11 @@ public class Complexo {
     }
 
     public double getReal() {
-        return real;
+        return this.real;
     }
 
     public double getImg() {
-        return img;
+        return this.img;
     }
 
     public Complexo soma(Complexo c) {
@@ -38,55 +36,49 @@ public class Complexo {
         return new Complexo (real - c.real, img - c.img);
     }
 
-    public Complexo prod(double real) {
-        Complexo cnovo = new Complexo();
-        cnovo.real = real * real;
-        cnovo.img = img * real;
-        return cnovo;
+    public Complexo prod(double r) {
+        Complexo cNovo = new Complexo();
+        cNovo.real = real * r;
+        cNovo.img = img * r;
+        return cNovo;
     }
 
     public Complexo prod(Complexo c) {
-        Complexo cprod = new Complexo();
-        cprod.real = real * c.real - img * c.img;
-        cprod.img = real * c.img + img * c.real;
-        return cprod;
+        Complexo cProd = new Complexo();
+        cProd.real = real * c.real - img * c.img;
+        cProd.img = real * c.img + img * c.real;
+        return cProd;
     }
     
     public Complexo div(Complexo c) {
-        Complexo cdiv = new Complexo();
-        cdiv.real = (real * c.real + img * c.img)/(c.real * c.real + c.img * c.img);
-        cdiv.img = (real * c.img - img * c.real)/(c.real * c.real + c.img * c.img);
-        return cdiv;
+        Complexo cDiv = new Complexo();
+        cDiv.real = (real * c.real + img * c.img)/(c.real * c.real + c.img * c.img);
+        cDiv.img = (real * c.img - img * c.real)/(c.real * c.real + c.img * c.img);
+        return cDiv;
     }
     
     // implementar sqrt()
     public Complexo[] sqrt() {
-        Complexo craiz = new Complexo();
-        if (real > 0) {
-        craiz.real = Math.sqrt(Math.sqrt(real * real + img * img)) * Math.cos(Math.atan(img/real)/2) + c.(Math.sen(Math.atan(img/real)/2));
-        craiz.img = Math.sqrt(Math.sqrt(real * real + img * img)) * Math.cos((Math.atan(img/real) + Math.PI)/2) + c.(Math.sen((Math.atan(img/real) + Math.PI)/2));
-        return craiz;
-        }
-        else if (real < 0) {
-        craiz.real = Math.sqrt(Math.sqrt(real * real + img * img)) * Math.cos((Math.atan(img/real) + Math.PI)/2) + c.(Math.sen(Math.atan(img/real) + Math.PI)/2));
-        craiz.img = Math.sqrt(Math.sqrt(real * real + img * img)) * Math.cos((Math.atan(img/real) + Math.PI) + Math.PI/2) + c.(Math.sen(Math.atan(img/real) + Math.PI) + Math.PI/2));
-        return craiz;
-        }
-        else if (img > 0) {
-        craiz.real = Math.sqrt(Math.sqrt(real * real + img * img)) * Math.cos(Math.PI/4) + c.(Math.sen(Math.PI/4));
-        craiz.img = Math.sqrt(Math.sqrt(real * real + img * img)) * Math.cos(5 * Math.PI/4) + c.(Math.sen(5 * Math.PI/4));
-        return craiz;
-        }
-        else if (real < 0) {
-        craiz.real = Math.sqrt(Math.sqrt(real * real + img * img)) * Math.cos(3 * Math.PI/4) + c.(Math.sen(3 * Math.PI/4));
-        craiz.img = Math.sqrt(Math.sqrt(real * real + img * img)) * Math.cos(7 * Math.PI/4) + c.(Math.sen(7 * Math.PI/4));
-        return craiz;
-        }
-        else {
-        craiz.real = Math.sqrt(Math.sqrt(real * real + img * img)) * Math.cos(0) + c.(Math.sen(0));
-        craiz.img = Math.sqrt(Math.sqrt(real * real + img * img)) * Math.cos(Math.PI) + c.(Math.sen(Math.PI));
-        return craiz;
-        }
+        Complexo[] vetor = new Complexo[2];
+        double fi, ro;
+        
+        ro = Math.sqrt(Math.sqrt(Math.pow(real, 2) + Math.pow(img, 2)));
+        
+        if(real > 0)
+            fi = Math.atan(img/real);
+        else if(real < 0)
+            fi = Math.atan(img/real) + Math.PI;
+        else if(real == 0 && img == 0)
+            fi = 0;
+        else if(real == 0 && img > 0)
+            fi = Math.PI/2;
+        else
+            fi = 3*Math.PI/2;
+        
+        vetor[0] = new Complexo(ro*Math.cos(fi/2),ro*Math.sin(fi/2));
+        vetor[1] = new Complexo(ro*Math.cos(fi/2 + Math.PI), ro*Math.sin(fi/2 + Math.PI));
+        
+        return vetor;
     }
 
     @Override
